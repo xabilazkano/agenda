@@ -6,7 +6,6 @@ session_start();
 	<title>AGENDA</title>
 </head>
 <body>
-
 	<center>
 		<h1>Introduce tus datos</h1>
 		<form method="Post" action="agenda.php">
@@ -24,14 +23,14 @@ session_start();
 				}
 				else{
 					$agenda=$_SESSION["agenda"];
-
 					if($_POST["bidali"]){
 						$agenda[$_POST["izena"]]=$_POST["email"];
 						foreach ($agenda as $key => $value) {
-							echo count($agenda);
+							echo "<br>Nombre: ".$key."<br>";
+							echo "Correo: ".$value."<br>";
 						}
 					}
-
+					$_SESSION["agenda"]=$agenda;
 				}
 				
 				?>
