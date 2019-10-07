@@ -1,6 +1,6 @@
 <?php
-session_start();
-if(!isset($_SESSION["agenda"])){
+session_start(); //inicia sesion
+if(!isset($_SESSION["agenda"])){ //si la variable de sesion agenda no esta creada crea un array y guarda en otra variable el nombre recibido del index
 	$_SESSION["agenda"]= array();
 	$_SESSION["name"]=$_POST["nombre"];
 }
@@ -11,15 +11,15 @@ if(!isset($_SESSION["agenda"])){
 </head>
 <body>
 	<center>
-		<h1>AGENDA DE <?php echo strtoupper($_SESSION["name"]) ?></h1>
+		<h1>AGENDA DE <?php echo strtoupper($_SESSION["name"]) ?></h1> 
 		<form method="Post" action="agenda.php">
 			Nombre: <input type="text" name="izena"<?php
-			if(isset($_POST["izena"])){
+			if(isset($_POST["izena"])){ //si hemos enviado información escribe el último nombre
 				echo "value=".$_POST['izena'];
 			}
 			?>><br><br>
 			Email: <input type="email" name="email"<?php
-			if(isset($_POST["email"])){
+			if(isset($_POST["email"])){//si hemos enviado información escribe el último email
 				echo "value=".$_POST['email'];
 			}
 			?>
@@ -32,15 +32,15 @@ if(!isset($_SESSION["agenda"])){
 				
 				<?php
 				if($_POST["bidali"]){
-					$izena=strtolower($_POST["izena"]);
+					$izena=strtolower($_POST["izena"]);//guardamos en variables el nombre y el email
 					$email=strtolower($_POST["email"]);
-					$agenda=$_SESSION["agenda"];
+					$agenda=$_SESSION["agenda"]; //cargamos el array en una variable
 					if($_POST["izena"]!=""){
 
-						if(!array_key_exists($izena,$agenda)){
-							if($_POST["email"]!=""){
-								$agenda[$izena]=$email;
-								foreach ($agenda as $key => $value) {
+						if(!array_key_exists($izena,$agenda)){//comprueba si el contacto existe
+							if($_POST["email"]!=""){//comprueba que el email no está vacio
+								$agenda[$izena]=$email;//añade el nuevo contacto
+								foreach ($agenda as $key => $value) { //imprime la agenda
 									echo "<br>Nombre: ".$key."<br>";
 									echo "Correo: ".$value."<br>";
 
@@ -52,16 +52,16 @@ if(!isset($_SESSION["agenda"])){
 							}
 						}
 						else{
-							if($email!=""){
+							if($email!=""){//si el contacto existe actualizamos el email
 								$agenda[$izena]=$email;
-								foreach ($agenda as $key => $value) {
+								foreach ($agenda as $key => $value) {//imprime la agenda
 									echo "<br>Nombre: ".$key."<br>";
 									echo "Correo: ".$value."<br>";
 								}
 							}
 							else{
-								unset($agenda[$izena]);
-								foreach ($agenda as $key => $value) {
+								unset($agenda[$izena]); //si el contacto existe y no se ha introducido ningun email se elimina el contacto
+								foreach ($agenda as $key => $value) {//imprime la agenda
 									echo "<br>Nombre: ".$key."<br>";
 									echo "Correo: ".$value."<br>";
 								}
@@ -72,7 +72,7 @@ if(!isset($_SESSION["agenda"])){
 						echo "No has introducido el nombre";
 					}	
 				}
-				$_SESSION["agenda"]=$agenda;
+				$_SESSION["agenda"]=$agenda;//volvemos a cargar la agenda en la variable de sesion
 				?>
 			</p>
 		</aside>
