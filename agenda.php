@@ -1,6 +1,6 @@
 <?php
 session_start(); //inicia sesion
-if(!isset($_SESSION["agenda"])){ //si la variable de sesion agenda no esta creada crea un array y guarda en otra variable el nombre recibido del index
+if(isset($_POST["enviar"])){ //si la variable de sesion agenda no esta creada crea un array y guarda en otra variable el nombre recibido del index
 	$_SESSION["agenda"]= array();
 	$_SESSION["name"]=$_POST["nombre"];
 }
@@ -11,7 +11,7 @@ if(!isset($_SESSION["agenda"])){ //si la variable de sesion agenda no esta cread
 </head>
 <body>
 	<center>
-		<h1>AGENDA DE <?php echo strtoupper($_SESSION["name"]) ?></h1> 
+		<h1>AGENDA DE <?php echo $_SESSION["name"] ?></h1> 
 		<form method="Post" action="agenda.php">
 			Nombre: <input type="text" name="izena"<?php
 			if(isset($_POST["izena"])){ //si hemos enviado información escribe el último nombre
@@ -28,7 +28,7 @@ if(!isset($_SESSION["agenda"])){ //si la variable de sesion agenda no esta cread
 		</form>
 		<aside>
 			<h2>Agenda</h2>
-			<p  id="informacion">
+			<p id="informacion">
 				
 				<?php
 				if($_POST["bidali"]){
